@@ -11,6 +11,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { environment } from 'src/environments/environment';
 import { ProductsComponent } from './products/products.component';
+import { MaterialModule } from './material,module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ProductsComponent } from './products/products.component';
      AngularFireModule.initializeApp(environment.firebaseConfig),
      AngularFirestoreModule,
      AngularFireDatabaseModule,
+     MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
