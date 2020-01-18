@@ -18,6 +18,9 @@ export class ProductService {
   }
 
   addProducts(p: Product){
-    return this.productsCollections.add(p);
+    const id  = this.afs.createId();
+    p.id = id;
+    return this.productsCollections.doc(p.id).set(p)
+    /* return this.productsCollections.add(p); */
   }
 }

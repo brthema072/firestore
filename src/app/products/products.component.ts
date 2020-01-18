@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ProductService } from '../product.service';
 import { MatSnackBar } from '@angular/material';
 import { Product } from '../models/products.module';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -13,6 +14,9 @@ export class ProductsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private productService: ProductService, private snackBar: MatSnackBar) { }
 
+  products$ : Observable<Product[]>;
+  displayedColumns = ['name', 'price', 'stock', 'operations']
+
   productForm = this.fb.group({
     id: [undefined],
     name: ['', [Validators.required]],
@@ -21,10 +25,12 @@ export class ProductsComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.products$ = this.productService.getProducts();
   }
 
   onSubmit(){
     let p: Product = this.productForm.value;
+    console.log(this.productForm.value)
 
     if(!p.id){
       this.addProduct(p);
